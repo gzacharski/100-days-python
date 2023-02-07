@@ -33,3 +33,10 @@ print(7 - 4)
 print(3 + 2)
 print(6 / 3)
 print(2 ** 3)
+
+print(round(8 / 3))
+print(round(8 / 3, 2))
+print(round(8 // 3))
+
+name = "Grzegorz"
+print(f'Hello {name}')
