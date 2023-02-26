@@ -36,23 +36,23 @@ operations = {
 }
 
 number_1 = int(input("What is the first number? "))
-number_2 = int(input("What is the second number? "))
-for symbol in operations.keys():
-    print(f"Type {symbol} for {operations[symbol].__name__}.")
 
-operation = str(input("What operation do you want to do? "))
-if operation not in operations:
-    print(f"There is no such an operation like: {operation}.")
-    exit()
+should_continue = True
 
-func = operations[operation]
-result = func(number_1, number_2)
-print(f"{number_1} {operation} {number_2} = {result}")
+while should_continue:
+    for symbol in operations.keys():
+        print(f"Type {symbol} for {operations[symbol].__name__}.")
+    operation = str(input("What operation do you want to do? "))
 
-for symbol in operations.keys():
-    print(f"Type {symbol} for {operations[symbol].__name__}.")
+    number_2 = int(input("What is the second number? "))
+    if operation not in operations:
+        print(f"There is no such an operation like: {operation}.")
+        exit()
 
-operation = str(input("Pick another operation? "))
-number_3 = int(input("What is the second number? "))
-second_result = operations[operation](result, number_3)
-print(f"{result} {operation} {number_3} = {second_result}")
+    func = operations[operation]
+    result = func(number_1, number_2)
+    print(f"{number_1} {operation} {number_2} = {result}")
+    if input(f"Type 'y' to continue calculating with {result}, or type 'n' to exit.: ") == "y":
+        number_1 = result
+    else:
+        should_continue = False
