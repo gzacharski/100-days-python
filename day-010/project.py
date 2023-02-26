@@ -35,24 +35,30 @@ operations = {
     "/": divide
 }
 
-number_1 = int(input("What is the first number? "))
 
-should_continue = True
+def calculator():
+    number_1 = float(input("What is the first number? "))
 
-while should_continue:
-    for symbol in operations.keys():
-        print(f"Type {symbol} for {operations[symbol].__name__}.")
-    operation = str(input("What operation do you want to do? "))
+    should_continue = True
 
-    number_2 = int(input("What is the second number? "))
-    if operation not in operations:
-        print(f"There is no such an operation like: {operation}.")
-        exit()
+    while should_continue:
+        for symbol in operations.keys():
+            print(f"Type {symbol} for {operations[symbol].__name__}.")
+        operation = str(input("What operation do you want to do? "))
 
-    func = operations[operation]
-    result = func(number_1, number_2)
-    print(f"{number_1} {operation} {number_2} = {result}")
-    if input(f"Type 'y' to continue calculating with {result}, or type 'n' to exit.: ") == "y":
-        number_1 = result
-    else:
-        should_continue = False
+        number_2 = float(input("What is the second number? "))
+        if operation not in operations:
+            print(f"There is no such an operation like: {operation}.")
+            exit()
+
+        func = operations[operation]
+        result = func(number_1, number_2)
+        print(f"{number_1} {operation} {number_2} = {result}")
+        if input(f"Type 'y' to continue calculating with {result}, or type 'n' to exit.: ") == "y":
+            number_1 = result
+        else:
+            should_continue = False
+            calculator()
+
+
+calculator()
