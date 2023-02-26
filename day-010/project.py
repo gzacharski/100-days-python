@@ -41,10 +41,18 @@ for symbol in operations.keys():
     print(f"Type {symbol} for {operations[symbol].__name__}.")
 
 operation = str(input("What operation do you want to do? "))
-if not operation in operations:
+if operation not in operations:
     print(f"There is no such an operation like: {operation}.")
     exit()
 
 func = operations[operation]
 result = func(number_1, number_2)
 print(f"{number_1} {operation} {number_2} = {result}")
+
+for symbol in operations.keys():
+    print(f"Type {symbol} for {operations[symbol].__name__}.")
+
+operation = str(input("Pick another operation? "))
+number_3 = int(input("What is the second number? "))
+second_result = operations[operation](result, number_3)
+print(f"{result} {operation} {number_3} = {second_result}")
