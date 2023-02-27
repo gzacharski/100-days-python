@@ -19,8 +19,79 @@
 
 
 from art import logo
+import random
 
-print(logo)
+
+def draw_two_cards():
+    drawn_cards = []
+    for _ in range(2):
+        drawn_cards.append(draw_a_card())
+    return drawn_cards
+
+
+def draw_a_card():
+    """Returns a random card from the deck."""
+    cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
+    return random.choice(cards)
+
+
+def calculate_score(drawn_cards=[]):
+    """Returns the score of the cards."""
+    if sum(drawn_cards) == 21 and len(drawn_cards) == 2:
+        return 0
+
+    if 11 in drawn_cards and sum(cards) > 21:
+        drawn_cards.remove(11)
+        drawn_cards.append(1)
+
+    return sum(drawn_cards)
+
+
+def compare(users_cards, computers_cards):
+    print(f"Your final hand: {users_cards} - sum {calculate_score(users_cards)}")
+    print(f"Computer's final hand: {computers_cards} - sum {calculate_score(computers_cards)}")
+
+    if calculate_score(computers_cards) < calculate_score(users_cards) <= 21 or calculate_score(
+            users_cards) <= 21 < calculate_score(computers_cards):
+        print("You win")
+    elif calculate_score(computers_cards) == calculate_score(users_cards) <= 21 or (
+            calculate_score(computers_cards) > 21 and calculate_score(users_cards) > 21):
+        print("Draw")
+    else:
+        print("Computer win")
+
+
+while True:
+    play_decision = input("Do you want to play a game of Blackjack? Type 'y' or 'n': ")
+    print(logo)
+    if play_decision == 'n':
+        break
+
+    users_cards = draw_two_cards()
+    computers_cards = draw_two_cards()
+    print(f"Your cards: {users_cards}")
+    print(f"Computer's first card: [{computers_cards[0]}]")
+
+    if calculate_score(users_cards) == 21:
+        print("You win")
+
+    while calculate_score(users_cards) <= 21:
+        get_another_card_decision = input("Type 'y' to get another card, type 'n' to pass: ")
+        if get_another_card_decision == 'n':
+            break
+        users_cards.append(draw_a_card())
+        print(f"Your cards: {users_cards}")
+
+    if calculate_score(users_cards) > 21:
+        print("Computer win")
+        continue
+
+    print(f"Computer's cards: {computers_cards}")
+    while calculate_score(computers_cards) < 17:
+        computers_cards.append(draw_a_card())
+        print(f"Computer's cards: {computers_cards}")
+
+    compare(users_cards, computers_cards)
 
 ##################### Hints #####################
 
