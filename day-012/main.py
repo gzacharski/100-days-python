@@ -14,9 +14,14 @@ variable = 1
 
 
 def increment():
+    # bad habit - error prone
     global variable
     variable += 1
     print(variable)
 
 
 increment()
+
+# constants
+PI = 3.14159
+URL = "https://google.com"
