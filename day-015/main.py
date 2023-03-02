@@ -3,27 +3,35 @@ from resources import resources
 
 profit = 0
 
-print(menu)
-print(resources)
+
+def prompt_question_to_user():
+    return input("What would you like? (espresso/latte/cappuccino): ").lower()
 
 
-def is_enough_resources(coffee: str, left_resources) -> bool:
+def print_report_of_current_resources():
+    print(f"Water: {the_resources['water']}ml")
+    print(f"Milk: {the_resources['milk']}ml")
+    print(f"Coffee: {the_resources['coffee']}g")
+    print(f"Money: ${the_resources['money']}")
+
+
+def is_enough_resources(coffee: str) -> bool:
     selected_coffee = menu[coffee]
     ingredients = selected_coffee['ingredients']
-    water = ingredients['water']
-    milk = ingredients['milk']
-    coffee = ingredients['coffee']
+    water = ingredients.get('water')
+    milk = ingredients.get('milk', 0)
+    coffee = ingredients.get('coffee', 0)
 
-    if water < left_resources['water']:
+    if water > the_resources['water']:
         print("Sorry there is not enough water.")
         return False
 
-    if milk < left_resources['water']:
-        print("Sorry there is not enough water.")
+    if milk > the_resources['water']:
+        print("Sorry there is not enough milk.")
         return False
 
-    if coffee < left_resources['coffee']:
-        print("Sorry there is not enough water.")
+    if coffee > the_resources['coffee']:
+        print("Sorry there is not enough coffee.")
         return False
 
     return True
@@ -41,36 +49,43 @@ def calculate_coins() -> float:
 
 
 def process_transaction(money_in_coins: float, money_required: float) -> bool:
+    if money_in_coins < money_required:
+        print("Sorry that's not enough money. Money refunded.")
+        return False
+    elif money_in_coins > money_required:
+        print(f"Here is ${money_in_coins - money_required} dollars in change.")
+
+    the_resources['money'] += money_required
     return True
 
 
-def make_a_coffee(selected_coffee, left_resources):
+def make_a_coffee(selected_coffee):
+    ingredients = menu.get(selected_coffee).get('ingredients')
+    the_resources['water'] -= ingredients.get('water', 0)
+    the_resources['milk'] -= ingredients.get('milk', 0)
+    the_resources['coffee'] -= ingredients.get('coffee', 0)
     print(f"Here is your {selected_coffee}. Enjoy!")
-    return True
 
 
-def report_current_resources():
-    print("")
-
-
+the_resources = resources
 while True:
-    decision = input("What would you like? (espresso/latte/cappuccino): ").lower()
+    decision = prompt_question_to_user()
 
     if decision == "off":
         print("Goodbye")
         break
 
     elif decision == "report":
-        report_current_resources()
+        print_report_of_current_resources()
 
     elif decision in ["espresso", "latte", "cappuccino"]:
-        if not is_enough_resources(decision, resources):
+        if not is_enough_resources(decision):
             break
         money_inserted = calculate_coins()
-
-        if not process_transaction(1.00, 1.00):
+        money_required = menu.get(decision).get('cost')
+        if not process_transaction(money_inserted, money_required):
             break
 
-        resources = make_a_coffee(decision, resources)
+        make_a_coffee(decision)
     else:
         print("error")
