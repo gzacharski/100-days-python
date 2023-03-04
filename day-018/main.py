@@ -2,8 +2,16 @@ import turtle
 from turtle import Turtle as MyTurtle, Screen as MyScreen
 import random
 
-colours = ["CornflowerBlue", "DarkOrchid", "IndianRed", "DeepSkyBlue", "LightSeaGreen", "wheat", "SlateGray",
-           "SeaGreen"]
+colours = [
+    "CornflowerBlue",
+    "DarkOrchid",
+    "IndianRed",
+    "DeepSkyBlue",
+    "LightSeaGreen",
+    "wheat",
+    "SlateGray",
+    "SeaGreen"
+]
 
 
 def random_colour():
