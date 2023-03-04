@@ -47,9 +47,18 @@ class TimmyTheTurtle:
             self.turtle.right(angle)
             self.turtle.forward(100)
 
+    def draw_a_circles(self, iterations):
+        turtle.colormode(255)
+        self.turtle.speed("fastest")
+        angle = 360 / iterations
+        for _ in range(iterations):
+            self.turtle.right(angle)
+            self.turtle.pencolor(random_colour())
+            self.turtle.circle(100)
+
 
 timmy_the_turtle = TimmyTheTurtle()
-timmy_the_turtle.draw_random_walk(200)
+timmy_the_turtle.draw_a_circles(50)
 
 screen = MyScreen()
 screen.exitonclick()
