@@ -1,9 +1,9 @@
-from turtle import Turtle, Screen
+from turtle import Turtle as MyTurtle, Screen as MyScreen
 
 
 class TimmyTheTurtle:
     def __init__(self):
-        self.turtle = Turtle()
+        self.turtle = MyTurtle()
         self.turtle.shape("turtle")
         self.turtle.color("gray")
 
@@ -16,5 +16,5 @@ class TimmyTheTurtle:
 timmy_the_turtle = TimmyTheTurtle()
 timmy_the_turtle.draw_a_square()
 
-screen = Screen()
+screen = MyScreen()
 screen.exitonclick()
