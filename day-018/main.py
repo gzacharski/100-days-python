@@ -1,8 +1,13 @@
+import turtle
 from turtle import Turtle as MyTurtle, Screen as MyScreen
 import random
 
 colours = ["CornflowerBlue", "DarkOrchid", "IndianRed", "DeepSkyBlue", "LightSeaGreen", "wheat", "SlateGray",
            "SeaGreen"]
+
+
+def random_colour():
+    return random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)
 
 
 class TimmyTheTurtle:
@@ -35,10 +40,10 @@ class TimmyTheTurtle:
         angles = [0, 90, 180, 270]
         self.turtle.speed("fastest")
         self.turtle.pensize(10)
+        turtle.colormode(255)
         for _ in range(iterations):
             angle = random.choice(angles)
-            colour = random.choice(colours)
-            self.turtle.color(colour)
+            self.turtle.pencolor(random_colour())
             self.turtle.right(angle)
             self.turtle.forward(100)
 
