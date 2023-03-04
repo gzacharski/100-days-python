@@ -1,17 +1,20 @@
 from turtle import Turtle, Screen
 
 
-def draw_a_square():
-    for _ in range(4):
-        timmy_the_turtle.forward(100)
-        timmy_the_turtle.right(90)
+class TimmyTheTurtle:
+    def __init__(self):
+        self.turtle = Turtle()
+        self.turtle.shape("turtle")
+        self.turtle.color("gray")
+
+    def draw_a_square(self):
+        for _ in range(4):
+            self.turtle.forward(100)
+            self.turtle.right(90)
 
 
-timmy_the_turtle = Turtle()
-timmy_the_turtle.shape("turtle")
-timmy_the_turtle.color("gray")
-
-draw_a_square()
+timmy_the_turtle = TimmyTheTurtle()
+timmy_the_turtle.draw_a_square()
 
 screen = Screen()
 screen.exitonclick()
