@@ -9,8 +9,13 @@ class Ball(Turtle):
         self.dot(size=20)
         self.penup()
         self.color("white")
+        self.x_move = 1
+        self.y_move = 1
 
     def move(self):
-        x = self.xcor() + 1
-        y = self.ycor() + 1
+        x = self.xcor() + self.x_move
+        y = self.ycor() + self.y_move
         self.goto(x, y)
+
+    def bounce(self):
+        self.y_move *= -1
