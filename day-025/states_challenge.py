@@ -32,9 +32,6 @@ while not points >= 50:
         turtle_write.write(arg=state_row.state.item(), align="center", font=FONT)
         guessed_states.append(state_row.state.item())
 
-states_to_learn = []
-for state in data["state"].to_list():
-    if state not in guessed_states:
-        states_to_learn.append(state)
+states_to_learn = [state for state in data["state"].to_list() if state not in guessed_states]
 
 pandas.DataFrame(states_to_learn).to_csv("states_to_learn.csv")
