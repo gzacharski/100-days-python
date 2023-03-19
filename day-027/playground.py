@@ -1,4 +1,4 @@
-def add(num1: int, num2: int) -> int:
+def add(num1: int, num2: int = 2) -> int:
     return num1 + num2
 
 
@@ -28,3 +28,18 @@ def calculate(n, **kwargs):
 
 
 calculate(2, add=3, multiply=5)
+
+
+class Car:
+    def __init__(self, **kwargs):
+        default_kwargs = {'model': 'great-model'}
+        kwargs = {**default_kwargs, **kwargs}
+        self.make = kwargs.get("make")
+        self.model = kwargs.get("model")
+
+
+my_car = Car(make="Nissan")
+print(my_car.make)
+print(my_car.model)
+
+print(add(1))
