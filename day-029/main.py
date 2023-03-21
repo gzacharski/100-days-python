@@ -1,4 +1,4 @@
-from tkinter import Canvas, PhotoImage, Tk, Label, Button, Entry
+from tkinter import Canvas, PhotoImage, Tk, Label, Button, Entry, messagebox
 
 
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
@@ -9,9 +9,20 @@ def save():
     website_name = website_entry.get()
     username = username_entry.get()
     password = password_entry.get()
-    clear_entries()
-    with open("data.txt", "a") as file:
-        file.write(f"{website_name} | {username} | {password}\n")
+
+    if len(website_name) == 0 or len(username) == 0 or len(password) == 0:
+        messagebox.showwarning(title="Warning", message="You left the empty entry.")
+        return
+
+    is_ok = messagebox.askokcancel(title=website_name,
+                                   message=f"These are the details entered: "
+                                           f"\nEmail: {username} "
+                                           f"\nPassword: {password} "
+                                           f"\nIs it ok to save?")
+    if is_ok:
+        with open("data.txt", "a") as file:
+            file.write(f"{website_name} | {username} | {password}\n")
+            clear_entries()
 
 
 def clear_entries():
