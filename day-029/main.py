@@ -1,9 +1,26 @@
+from tkinter import Canvas, PhotoImage, Tk, Label, Button, Entry
+
+
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 
-# ---------------------------- UI SETUP ------------------------------- #
-from tkinter import Canvas, PhotoImage, Tk, Label, Button, Entry
+def save():
+    website_name = website_entry.get()
+    username = username_entry.get()
+    password = password_entry.get()
+    clear_entries()
+    with open("data.txt", "a") as file:
+        file.write(f"{website_name} | {username} | {password}\n")
+
+
+def clear_entries():
+    website_entry.delete(0, 'end')
+    username_entry.delete(0, 'end')
+    password_entry.delete(0, 'end')
+
+
+# ---------------------------- UI SETUP ------------------------------- #\
 
 window = Tk()
 window.title("Password Manager")
@@ -28,9 +45,11 @@ password_label.grid(column=0, row=3)
 # entries
 website_entry = Entry(width=35)
 website_entry.grid(column=1, row=1, columnspan=2)
+website_entry.focus()
 
 username_entry = Entry(width=35)
 username_entry.grid(column=1, row=2, columnspan=2)
+username_entry.insert(0, "jan.kowalski@wp.pl")
 
 password_entry = Entry(width=21)
 password_entry.grid(column=1, row=3)
@@ -39,7 +58,7 @@ password_entry.grid(column=1, row=3)
 generate_password_button = Button(text="Generate Password")
 generate_password_button.grid(column=2, row=3)
 
-add_button = Button(text="Add", width=36)
+add_button = Button(text="Add", width=36, command=save)
 add_button.grid(column=1, row=4, columnspan=2)
 
 window.mainloop()
