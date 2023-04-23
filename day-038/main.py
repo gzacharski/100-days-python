@@ -1,11 +1,12 @@
 import requests
 from datetime import datetime as dt
+import os
 
-APP_ID = "change_me"
-API_KEY = "change_me"
+APP_ID = os.environ["APP_ID"]
+API_KEY = os.environ["API_KEY"]
 
-SHEETY_URL = "change_me"
-ACCESS_TOKEN = "change_me"
+SHEETY_URL = os.environ["SHEETY_URL"]
+ACCESS_TOKEN = os.environ["ACCESS_TOKEN"]
 
 URL = "https://trackapi.nutritionix.com/v2/natural/exercise"
 HEADERS = {
